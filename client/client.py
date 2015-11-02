@@ -1,4 +1,4 @@
-import pickle, socket, sys
+import pickle, socket, sys, threading
 from PacketHandler import *
 from clientClasses import *
 
@@ -27,8 +27,11 @@ def main():
     clientSocket = initSocket('192.168.1.108', 1337)
     packetHandler = PacketHandler()
     print("initiated")
+        listenThread = threading.Thread(target=listenIncoming, args = (clientSocket, packetHandler))
+        listenThread.start()
+
     while True:
         #print(clientSocket.recv(10000))
-        listenIncoming(clientSocket, packetHandler)
-
+        listenThread.run()
+        
 main()
