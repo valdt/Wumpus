@@ -1,2 +1,3 @@
 class Player:
-    def __init():
+    def __init__(self):
+        print("player")
