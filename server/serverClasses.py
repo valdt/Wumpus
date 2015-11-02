@@ -11,7 +11,7 @@ class ServerSocket:
 
     def acceptPlayers(self,serverSocket):
         clientsocket, address = serverSocket.accept()
-        clientSocketList.append(Player(clientsocket))
+        self.clientSocketList.append(Player(clientsocket))
         print("New connection established from {}".format(address))
     def pulse(payload,clientsocket):
         try:
@@ -31,10 +31,9 @@ class ServerSocket:
 
 
 class Player:
-    def __init__(clientsocket):
-        data = ["handshake"]
-        data = pickle.dump(data)
-        reData = pulse(payload,clientsocket)
+    def __init__(self,clientsocket):
+        payload = ["handshake"]
+        reData = ServerSocket.pulse(payload,clientsocket)
         if reData[0] == "handshake":
             self.name = reData[1]
 
