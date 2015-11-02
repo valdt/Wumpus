@@ -6,16 +6,16 @@ def listenIncoming(socket, packetHandler):
     if socket:
         try:
             data = pickle.load(socket.recv(10000))
+            if data and data != "":
+
+                if data[0] == "dungeonUpdate":
+                    packetHandler.dungeonHandler.update(data)
+
+                elif data[0] == "wumpusUpdate":
+                    packetHandler.wu.update(data)
         except Exception:
             print("Exception was raised")
 
-        if data and data != "":
-
-            if data[0] == "dungeonUpdate":
-                packetHandler.dungeonHandler.update(data)
-
-            elif data[0] == "wumpusUpdate":
-                packetHandler.wu.update(data)
 def initSocket(ip, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((ip, port))
