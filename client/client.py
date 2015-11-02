@@ -6,8 +6,10 @@ def listenIncoming(clientSocket, packetHandler):
     if clientSocket:
         print("socket")
         try:
-            data = pickle.load(clientSocket.recv(10000))
+            data = pickle.loads(clientSocket.recv(10000))
             print("data tried and succeeded")
+            x = ["handshake","McFritte"]
+            clientSocket.send(pickle.dumps(x))
             if data != "":
                 print(data)
                 if data[0] == "dungeonUpdate":
