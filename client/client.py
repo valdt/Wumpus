@@ -28,7 +28,7 @@ def main():
     packetHandler = PacketHandler()
     print("initiated")
     while True:
-        print(clientSocket.recv(10000))
-        #listenIncoming(clientSocket, packetHandler)
+        #print(clientSocket.recv(10000))
+        listenIncoming(clientSocket, packetHandler)
 
 main()
