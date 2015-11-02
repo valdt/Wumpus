@@ -14,7 +14,8 @@ def listenIncoming(socket, packetHandler):
                 elif data[0] == "wumpusUpdate":
                     packetHandler.wu.update(data)
         except Exception:
-
+            pass
+            
 def initSocket(ip, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((ip, port))
