@@ -2,11 +2,11 @@ import pickle, socket, sys
 from PacketHandler import *
 from clientClasses import *
 
-def listenIncoming(socket, packetHandler):
-    if socket:
+def listenIncoming(clientSocket, packetHandler):
+    if clientSocket:
         print("socket")
         try:
-            data = pickle.load(socket.recv(10000))
+            data = pickle.load(clientSocket.recv(10000))
             print("data tried and succeeded")
             if data != "":
                 print(data)
@@ -28,6 +28,7 @@ def main():
     packetHandler = PacketHandler()
     print("initiated")
     while True:
-        listenIncoming(clientSocket, packetHandler)
+        print(clientSocket.recv(10000))
+        #listenIncoming(clientSocket, packetHandler)
 
 main()
