@@ -6,8 +6,8 @@ def listenIncoming(socket, packetHandler):
     if socket:
         try:
             data = pickle.load(socket.recv(10000))
-        except Exception as e:
-            print("Exception was raised, type: " + type(e))
+        except Exception:
+            print("Exception was raised")
 
         if data and data != "":
 
