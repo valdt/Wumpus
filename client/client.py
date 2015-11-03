@@ -2,7 +2,15 @@ import pickle, socket, sys, threading, time
 import tkinter as tk
 
 def updateGui(labelList):
-    pass
+    while True:
+        data = pickle.loads(serverSocket.recv(2048))
+        if data[0] == "GUI":
+            data.pop[0]
+            i = 0
+            for item in data:
+                labelList[i].configure(image=item)
+                i += 1
+
 def up(event):
     serverSocket.send(pickle.dumps(["move","up"]))
 def down(event):
@@ -43,7 +51,7 @@ for item in frameList:
     item.pack()
 
 #We start ouer GUI updater.
-updateGuiThread = threading.Thread(target=updateGui, args=(labelList))
+updateGuiThread = threading.Thread(target=updateGui, args=(labelList,)).start()
 #And we tell the server everything went well.
 serverSocket.send(pickle.dumps(["Handshake","iShouldPutAnInputHere"]))
 
