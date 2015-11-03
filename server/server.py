@@ -1,16 +1,18 @@
 from serverHandler import *
+from dungeonHandler import *
 from player import *
 import socket, pickle, threading
 
-def acceptPlayers(serverHandler):
+#This function runs in its own thread.
+def acceptPlayers(serverHandler,dungeonHandler):
     while True:
         clientsocket, address = serverHandler.serverSocket.accept()
-        serverHandler.clientSocketList.append(Player(serverHandler,clientsocket))
-        print("New connection established from {}".format(address))
-
+        serverHandler.activePlayers.append(Player(serverHandler,clientsocket,dungeonHandler))
 def main():
     serverHandler = ServerHandler('',1337)
-    acceptPlayersThread = threading.Thread(target=acceptPlayers, args=(serverHandler,)).start()
+    dungeonHandler = DungeonHandler()
+    dungeonHandler.newDungeon()
+    acceptPlayersThread = threading.Thread(target=acceptPlayers, args=(serverHandler,dungeonHandler,)).start()
 
 
 
