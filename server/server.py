@@ -13,6 +13,8 @@ def main():
     dungeonHandler = DungeonHandler()
     dungeonHandler.newDungeon()
     acceptPlayersThread = threading.Thread(target=acceptPlayers, args=(serverHandler,dungeonHandler,)).start()
+    time.sleep(4)
+    dungeonStreamThread = threading.Thread(target=dungeonHandler.dungeonStream, args=(serverHandler.activePlayers,)).start()
 
 
 

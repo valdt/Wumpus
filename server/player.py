@@ -4,7 +4,7 @@ class Player:
         self.dungeonHandler = dungeonHandler
         self.clientsocket = clientsocket
         self.alive = True
-        self.y = int(13)
+        self.y = int(0)
         self.x = int(0)
         payload = ["Handshake","404"]
         reData = serverHandler.pulse(payload,self.clientsocket)
