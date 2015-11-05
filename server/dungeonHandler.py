@@ -8,6 +8,7 @@ class DungeonHandler:
         self.rWumpus = "wumpus"
         self.rEnd = "end"
         self.rPlayer = "player"
+        self.rArrow = "arrow"
     def newDungeon(self):
         for i in range(self.size):
             self.dungeon.append([])
@@ -34,44 +35,48 @@ class DungeonHandler:
                         except:
                             payload.append(self.rEnd)
                 player.clientsocket.send(pickle.dumps(payload))
-
+    def bat():
+        pass
+    def gameOver(player):
+        print("ohh you dead!")
     def updatePlayer(self,player,move):
+        trigger = {}
+        trigger[self.rWumpus] = self.gameOver
+        thingsYouWantToMoveInto = [self.rEmpty,self.rBat]
+        thingsYouDontWantoMoveInto = [self.rWumpus,self.rArrow]
         try:
             # -----Up--------
+            print("{}: {}".format(player.name,move))
             if move == "up":
-                if self.dungeon[player.y-1][player.x] in [self.rEmpty,self.rBat] and player.y-1 >= 0 :
+                if self.dungeon[player.y-1][player.x] in thingsYouWantToMoveInto and player.y-1 >= 0 :
                     self.dungeon[player.y][player.x] = self.rEmpty
                     self.dungeon[player.y-1][player.x] = player.name
                     player.y -= 1
-                    print("{}: {}".format(player.name,move))
-                elif self.dungeon[player.y-1][player.x] == self.rWumpus:
+                elif self.dungeon[player.y-1][player.x] in thingsYouDontWantoMoveInto:
                     print("ohh you dead!")
             # -----Down--------
             if move == "down":
-                if self.dungeon[player.y+1][player.x] in [self.rEmpty,self.rBat] and player.y+1 < self.size:
+                if self.dungeon[player.y+1][player.x] in thingsYouWantToMoveInto and player.y+1 < self.size:
                     self.dungeon[player.y][player.x] = self.rEmpty
                     self.dungeon[player.y+1][player.x] = player.name
                     player.y += 1
-                    print("{}: {}".format(player.name,move))
-                elif self.dungeon[player.y+1][player.x] == self.rWumpus:
+                elif self.dungeon[player.y+1][player.x] in thingsYouDontWantoMoveInto:
                     print("ohh you dead!")
             # -----Left--------
             if move == "left":
-                if self.dungeon[player.y][player.x-1] in [self.rEmpty,self.rBat] and player.x-1 >= 0:
+                if self.dungeon[player.y][player.x-1] in thingsYouWantToMoveInto and player.x-1 >= 0:
                     self.dungeon[player.y][player.x] = self.rEmpty
                     self.dungeon[player.y][player.x-1] = player.name
                     player.x -= 1
-                    print("{}: {}".format(player.name,move))
-                elif self.dungeon[player.y][player.x-1] == self.rWumpus:
+                elif self.dungeon[player.y][player.x-1] in thingsYouDontWantoMoveInto:
                     print("ohh you dead!")
             #---- Right -------
             if move == "right":
-                if self.dungeon[player.y][player.x+1] in [self.rEmpty,self.rBat] and player.x+1 < self.size:
+                if self.dungeon[player.y][player.x+1] in thingsYouWantToMoveInto and player.x+1 < self.size:
                     self.dungeon[player.y][player.x] = self.rEmpty
                     self.dungeon[player.y][player.x+1] = player.name
                     player.x += 1
-                    print("{}: {}".format(player.name,move))
-                elif self.dungeon[player.y][player.x+1] == self.rWumpus:
+                elif self.dungeon[player.y][player.x+1] in thingsYouDontWantoMoveInto:
                     print("ohh you dead!")
 
         except:

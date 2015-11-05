@@ -2,6 +2,7 @@ import pickle, socket, sys, threading, time
 import tkinter as tk
 
 def updateGui(labelList,rooms):
+    print("Reciver started!")
     while True:
         try:
             data = pickle.loads(serverSocket.recv(2048))
@@ -15,16 +16,24 @@ def updateGui(labelList,rooms):
         except:
             pass
 
-def up(event):
+def mUp(event):
     serverSocket.send(pickle.dumps(["move","up"]))
-def down(event):
+def mDown(event):
     serverSocket.send(pickle.dumps(["move","down"]))
-def right(event):
+def mRight(event):
     serverSocket.send(pickle.dumps(["move","right"]))
-def left(event):
+def mLeft(event):
     serverSocket.send(pickle.dumps(["move","left"]))
-def space(event):
-    serverSocket.send(pickle.dumps(["move","space"]))
+def special(event):
+    serverSocket.send(pickle.dumps(["move","special"]))
+def sUp(event):
+    serverSocket.send(pickle.dumps(["move","sUp"]))
+def sDown(event):
+    serverSocket.send(pickle.dumps(["move","sDown"]))
+def sLeft(event):
+    serverSocket.send(pickle.dumps(["move","sLeft"]))
+def sRight(event):
+    serverSocket.send(pickle.dumps(["move","sRight"]))
 
 #Setting up a basic Socket connection.
 global serverSocket
@@ -62,13 +71,16 @@ for item in frameList:
 #We start ouer GUI updater.
 updateGuiThread = threading.Thread(target=updateGui, args=(labelList,rooms)).start()
 #And we tell the server everything went well.
-serverSocket.send(pickle.dumps(["Handshake","iShouldPutAnInputHere"]))
+serverSocket.send(pickle.dumps(["Handshake","GenericPlayer"]))
 
-root.bind("<Up>", up)
-root.bind("<Down>", down)
-root.bind("<Left>", left)
-root.bind("<Right>", right)
-root.bind("<space>", space)
-
+root.bind("<w>", mUp)
+root.bind("<s>", mDown)
+root.bind("<a>", mLeft)
+root.bind("<d>", mRight)
+root.bind("<space>", special)
+root.bind("<Up>", sUp)
+root.bind("<Down>", sDown)
+root.bind("<Right>", sRight)
+root.bind("<Left>", sLeft)
 
 root.mainloop()
