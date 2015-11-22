@@ -10,10 +10,10 @@ def acceptPlayers(serverHandler,dungeonHandler):
         serverHandler.activePlayers.append(Player(serverHandler,clientsocket,dungeonHandler))
 def main():
     serverHandler = ServerHandler('',1337)
-    dungeonHandler = DungeonHandler()
+    dungeonHandler = DungeonHandler(serverHandler)
     dungeonHandler.newDungeon()
     acceptPlayersThread = threading.Thread(target=acceptPlayers, args=(serverHandler,dungeonHandler,)).start()
-    time.sleep(4)
+    time.sleep(2)
     dungeonStreamThread = threading.Thread(target=dungeonHandler.dungeonStream, args=(serverHandler.activePlayers,)).start()
 
 

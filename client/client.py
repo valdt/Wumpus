@@ -7,12 +7,14 @@ def updateGui(labelList,rooms):
         try:
             data = pickle.loads(serverSocket.recv(2048))
             if data[0] == "GUI":
+                labelList[-1].configure(text=data[-1])
+                data.remove(data[-1])
                 data.remove("GUI")
                 i = 0
                 for item in data:
                     labelList[i].configure(image=rooms[item])
                     i += 1
-                labelList[12].configure(image=rooms["player"])
+                #labelList[12].configure(image=rooms["player"])
         except:
             pass
 
@@ -25,15 +27,15 @@ def mRight(event):
 def mLeft(event):
     serverSocket.send(pickle.dumps(["move","left"]))
 def special(event):
-    serverSocket.send(pickle.dumps(["move","special"]))
+    serverSocket.send(pickle.dumps(["special","special"]))
 def sUp(event):
-    serverSocket.send(pickle.dumps(["move","sUp"]))
+    serverSocket.send(pickle.dumps(["shoot","sUp"]))
 def sDown(event):
-    serverSocket.send(pickle.dumps(["move","sDown"]))
+    serverSocket.send(pickle.dumps(["shoot","sDown"]))
 def sLeft(event):
-    serverSocket.send(pickle.dumps(["move","sLeft"]))
+    serverSocket.send(pickle.dumps(["shoot","sLeft"]))
 def sRight(event):
-    serverSocket.send(pickle.dumps(["move","sRight"]))
+    serverSocket.send(pickle.dumps(["shoot","sRight"]))
 
 #Setting up a basic Socket connection.
 global serverSocket
@@ -50,6 +52,8 @@ rooms["bat"] = tk.PhotoImage(file="img/bat.gif")
 rooms["end"] = tk.PhotoImage(file="img/wall.gif")
 rooms["player"] = tk.PhotoImage(file="img/player.gif")
 rooms["wumpus"] = tk.PhotoImage(file="img/wumpus.gif")
+rooms["bullet"] = tk.PhotoImage(file="img/bullet.gif")
+rooms["death"] = tk.PhotoImage(file="img/death.gif")
 
 
 
@@ -57,15 +61,16 @@ rooms["wumpus"] = tk.PhotoImage(file="img/wumpus.gif")
 frameList = []
 labelList = []
 #To sum it up: For every "list" append 5 tkinter Labels
-for i in range(6):
+for i in range(10):
     frameList.append( tk.Frame(bg="blue") )
 for item in frameList[0:-1]:
-    for i in range(5):
+    for i in range(9):
         labelList.append( tk.Label(item, image=rooms["e"], bd=0) )
 for item in labelList:
     item.pack(side=tk.LEFT)
-labelList.append( tk.Label(frameList[-1], height=3, text="I made this, but idk why.", bd=0).pack(side=tk.LEFT) )
-labelList[12].configure(image=rooms["player"])
+labelList.append(tk.Label(frameList[-1], height=3, text="I made this, but idk why.", bd=0))
+labelList[-1].pack(side=tk.LEFT)
+labelList[40].configure(image=rooms["player"])
 for item in frameList:
     item.pack()
 #We start ouer GUI updater.
