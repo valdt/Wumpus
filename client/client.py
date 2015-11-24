@@ -54,6 +54,8 @@ rooms["player"] = tk.PhotoImage(file="img/player.gif")
 rooms["wumpus"] = tk.PhotoImage(file="img/wumpus.gif")
 rooms["bullet"] = tk.PhotoImage(file="img/bullet.gif")
 rooms["death"] = tk.PhotoImage(file="img/death.gif")
+rooms["spawn"] = tk.PhotoImage(file="img/spawn.gif")
+rooms["server"] = tk.PhotoImage(file="img/server.gif")
 
 
 

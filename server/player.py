@@ -17,6 +17,7 @@ class Player:
         if reData[0] == "Handshake":
             self.name = reData[1]
             threading.Thread(target=self.playerInput).start()
+        dungeonHandler.spawnPlayer(self)
     #Notice thats this function should and is run in a thread!
     def antiSpam(self):
         self.spam = True
