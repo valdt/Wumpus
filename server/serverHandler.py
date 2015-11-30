@@ -8,15 +8,12 @@ class ServerHandler:
         self.serverSocket.listen(10)
 
     def pulse(self,payload,clientsocket):
-        print(payload)
         try:
             defaultError = ["error","Replie took to long and TTL expired."]
             clientsocket.send(pickle.dumps(payload, -1))
-            print("Pulse: Sent message")
             ttl = 0
             while True:
                 ttl += 1
-                print("Pulse: Waiting for message...")
                 data = clientsocket.recv(2048)
                 if data and data != "":
                     return pickle.loads(data)

@@ -14,7 +14,6 @@ def updateGui(labelList,rooms):
                 for item in data:
                     labelList[i].configure(image=rooms[item])
                     i += 1
-                #labelList[12].configure(image=rooms["player"])
         except:
             pass
 
@@ -51,11 +50,12 @@ rooms["e"] = tk.PhotoImage(file="img/floor1.gif")
 rooms["bat"] = tk.PhotoImage(file="img/bat.gif")
 rooms["end"] = tk.PhotoImage(file="img/wall.gif")
 rooms["player"] = tk.PhotoImage(file="img/player.gif")
-rooms["wumpus"] = tk.PhotoImage(file="img/wumpus.gif")
+rooms["wumpus"] = tk.PhotoImage(file="img/wumpus2.gif")
 rooms["bullet"] = tk.PhotoImage(file="img/bullet.gif")
 rooms["death"] = tk.PhotoImage(file="img/death.gif")
 rooms["spawn"] = tk.PhotoImage(file="img/spawn.gif")
 rooms["server"] = tk.PhotoImage(file="img/server.gif")
+rooms["power"] = tk.PhotoImage(file="img/powerup.gif")
 
 
 
@@ -70,7 +70,7 @@ for item in frameList[0:-1]:
         labelList.append( tk.Label(item, image=rooms["e"], bd=0) )
 for item in labelList:
     item.pack(side=tk.LEFT)
-labelList.append(tk.Label(frameList[-1], height=3, text="I made this, but idk why.", bd=0))
+labelList.append(tk.Label(frameList[-1], height=3, text="Servers not read yet...", bd=0))
 labelList[-1].pack(side=tk.LEFT)
 labelList[40].configure(image=rooms["player"])
 for item in frameList:

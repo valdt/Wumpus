@@ -6,14 +6,11 @@ class Player:
         self.alive = True
         self.y = int(0)
         self.x = int(0)
-        self.bulletRange = int(3)
+        self.bulletRange = int(4)
         self.score = int(0)
         self.spam = False
-        #self.antiSpamThread = threading.Thread(target=self.antiSpam, args=())
-        #self.antiSpamThread.start()
         payload = ["Handshake","404"]
         reData = serverHandler.pulse(payload,self.clientsocket)
-        print(reData)
         if reData[0] == "Handshake":
             self.name = reData[1]
             threading.Thread(target=self.playerInput).start()
@@ -38,4 +35,3 @@ class Player:
                     self.dungeonHandler.updatePlayer(self,data[1])
                 if data[0]=="shoot":
                     threading.Thread(target=self.dungeonHandler.liveBullet , args=(self,data[1],)).start()
-                    #self.dungeonHandler.liveBullet(self,data[1])
