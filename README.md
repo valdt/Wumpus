@@ -1,3 +1,5 @@
+#Wumpus 2.0
+work in progress...
 
 As final project for my introductory course in Python at the royal institute of technology i developed a more advanced version of the classic Wumpus assignment. This project expanded my knowledge in Python as well as evolving my way of planning. It also challenged the way handle different level of problems, most of which i could avoid by planning ahead. I also spent a lot of time going back rewriting code to be more fluent and less repeating. 
 
@@ -6,4 +8,4 @@ The code starts of with building its environment by utilizing threading as it cr
 The program is separated in two different parts client and server, the client is then separated into two main threads. Were the first thread handles receiving data from the server, tuning it up and parsing it along to a function that updates the graphical interface. The speed of this determines the frames per second (fps), the latency between the server sending the data and the user getting it rendered on his or hers screen has proven to be significant low under perfect conditions. The second thread of the client program handle keyboard inputs and creating a payload to be sent to the server. As you may figure the client is very lightweight as all the calculations are design to be executed on the server to eliminate interference from the user, with the intentions of preventing alterations to the gameplay. The client also have an buildin anti spam function to prevent the player's character from moving equally fast as the players can press the movement keys, this was discovered by holding down any of the keys.
 
 The server however is divided in three different threads who then in different stages spawns even more threads for handling everything from monster AI to bullets being fired.
-work in progress...
+
