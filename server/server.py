@@ -13,9 +13,9 @@ def main():
     print("Loading....")
     serverHandler = ServerHandler('',1337) #creating a new instance of ServerHandler parsing ''  will make the server lissten to all tcp/ip sources.
     dungeonHandler = DungeonHandler(serverHandler) #passing the pointer of socket when creating the DungeonHandler instance.
-    dungeonHandler.newDungeon() #Creating the field.
+    dungeonHandler.newDungeon() #Creating the two dimensional playfield.
     threading.Thread(target=acceptPlayers, args=(serverHandler,dungeonHandler,)).start() #Threading the acceptPlayers thread.
     threading.Thread(target=dungeonHandler.dungeonStream, args=(serverHandler.activePlayers,)).start() #Threading the streaming fucntion, the function thats sends data to players
-
+    #Notice thats i start the threads right away with ".start()" this prevents me saving as the threads in a variable, this is intentional as i don't need to interact with them.
 
 main() #If i need to comment this, you should not review this.
