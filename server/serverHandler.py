@@ -2,8 +2,8 @@ import pickle, socket, time, threading
 class ServerHandler:
     def __init__(self,host,port):
         self.activePlayers = []
-        self.serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #I am still researching, it lets me reuse the port.
+        self.serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Starting arguments for the socket are general default which i took
+        self.serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #from the offical python documentation.
         self.serverSocket.bind((host, port)) #Lock'n'Load ... bind*
         self.serverSocket.listen(10) #lissening for new connections
 
